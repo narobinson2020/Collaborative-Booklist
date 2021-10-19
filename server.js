@@ -1,10 +1,10 @@
 const express = require('express');
-//const connectDB = require('./config/db');
+const connectDB = require('./config/db');
 
 const app = express();
 
 //Connect to database 
-//connectDB();
+connectDB();
 
 //Initialize middlewear 
 //app.use(express.json({extended: false})); //this line will allow you to get the data from req.body in your users.js post route 
