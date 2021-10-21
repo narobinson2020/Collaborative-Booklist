@@ -7,7 +7,7 @@ const app = express();
 connectDB();
 
 //Initialize middlewear 
-//app.use(express.json({extended: false})); //this line will allow you to get the data from req.body in your users.js post route 
+app.use(express.json({extended: false})); //this line will allow you to get the data from req.body in your users.js post route 
 
 app.get('/', (req, res) => res.send('API running'));
 
