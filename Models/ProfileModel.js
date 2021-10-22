@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'UserModel'
   },
   email: {
     type: String
@@ -22,8 +22,6 @@ const ProfileSchema = new Schema({
       description: {
         type: String
       }
-      //I want to include all users that are apart of the list 
-      //not sure if that info goes here or somewhere else 
     }
   ],
   date: {
@@ -32,4 +30,4 @@ const ProfileSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('profile', ProfileSchema);
+module.exports = ProfileModel = mongoose.model('ProfileModel', ProfileSchema);

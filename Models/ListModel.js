@@ -19,6 +19,16 @@ const ListSchema = new Schema({
       description: {
         type: String,
       },
+      //add object that shows an array of all users contributing to the list 
+      //verify that this works 
+      contributors: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserModel'
+      }],
+      //need to do some sort of 1-5 star rating for each book
+      rating: {
+        
+      }
     },
   ],
   date: {
@@ -27,4 +37,4 @@ const ListSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('list', ListSchema);
+module.exports = ListModel = mongoose.model('ListModel', ListSchema);
