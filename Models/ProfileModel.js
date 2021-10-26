@@ -6,22 +6,18 @@ const ProfileSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserModel'
   },
+  username: {
+    type: String,
+    required: true
+  },
   email: {
     type: String
   },
+  //I want to "import" the list model and display that within the profile model
   lists: [
     {
-      title: {
-        type: String,
-        required: true
-      },
-      author: {
-        type: String,
-        required: true
-      },
-      description: {
-        type: String
-      }
+      type: mongoose.Schema.Types.ObjectId,
+          ref: 'ListModel'
     }
   ],
   date: {

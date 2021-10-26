@@ -20,7 +20,7 @@ const ListSchema = new Schema({
         type: String,
       },
       //add object that shows an array of all users contributing to the list 
-      //verify that this works 
+      //verify that this works!!!
       contributors: [{
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserModel'
