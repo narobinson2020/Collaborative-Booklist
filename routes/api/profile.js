@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../../Middleware/auth');
-const profileModel = require('../../Models/ProfileModel');
-const userModel = require('../../Models/UserModel');
-const listModel = require('../../Models/ListModel');
+const ProfileModel = require('../../Models/ProfileModel');
+const UserModel = require('../../Models/UserModel');
+const ListModel = require('../../Models/ListModel');
 const { check, validationResult } = require('express-validator');
 
 //@route: Get api/profile/me
@@ -101,13 +101,13 @@ router.post(
 router.delete('/', auth, async (req, res) => {
   try {
     //this wil delete all lists beloning to that profile 
-    await listModel.findOneAndRemove({ _id: req.user.id });
+    await ListModel.findOneAndRemove({ _id: req.user.id });
 
     //this will delete a profile
-    await profileModel.findOneAndRemove({ user: req.user.id });
+    await ProfileModel.findOneAndRemove({ user: req.user.id });
 
     //Remove a user
-    await userModel.findOneAndRemove({ _id: req.user.id });
+    await UserModel.findOneAndRemove({ _id: req.user.id });
 
     res.json({ message: 'User has been removed' });
   } catch (err) {
