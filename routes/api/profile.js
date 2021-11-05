@@ -55,9 +55,9 @@ router.post(
     if (username) profileFields.username = username;
     if (email) profileFields.email = email;
 
-    //this will turn the skills listed into an array.
-    //.split will turn the string of skills into an array
-    //the .map will take each skill in the array and remove any whitespace before or after the skill
+    //this will turn all the user's lists into an array.
+    //.split will turn the string of lists into an array
+    //the .map will take each list in the array and remove any whitespace before or after the list
     if (lists) {
       profileFields.lists = lists.split(',').map((list) => list.trim());
     }

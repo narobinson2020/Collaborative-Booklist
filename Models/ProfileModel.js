@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'UserModel'
   },
   username: {
@@ -13,11 +13,11 @@ const ProfileSchema = new Schema({
   email: {
     type: String
   },
-  //I want to "import" the list model and display that within the profile model
+  //imported the list model and displays it within each profile
   lists: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-          ref: 'ListModel'
+      type: Schema.Types.ObjectId,
+      ref: 'ListModel'
     }
   ],
   date: {
