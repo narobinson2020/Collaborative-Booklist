@@ -10,9 +10,6 @@ const ProfileSchema = new Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String
-  },
   //imported the list model and displays it within each profile
   lists: [
     {
