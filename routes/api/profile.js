@@ -5,7 +5,10 @@ const auth = require('../../Middleware/auth');
 const ProfileModel = require('../../Models/ProfileModel');
 const UserModel = require('../../Models/UserModel');
 const ListModel = require('../../Models/ListModel');
+//const RatingsModel = require('../../Models/RatingsModel');
 const { check, validationResult } = require('express-validator');
+//const axios = require('axios');
+
 
 //@route: Get api/profile/me
 //@description: Get the current user's profile
@@ -14,7 +17,7 @@ const { check, validationResult } = require('express-validator');
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await ProfileModel.findOne({ user: req.user.id }) //"user: req.user.id" will associate the user that signs in with their profile via the json web token
-      .populate('user', ['name', 'avatar']); //this will populate each user with their associated name and avatar
+      .populate('user', ['name', 'avatar','email', 'lists']); //this will populate each user with their associated name and avatar
 
     if (!profile) {
       res.status(400).json({ message: 'There is no profile for this user' });

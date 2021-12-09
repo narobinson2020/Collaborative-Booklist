@@ -10,7 +10,6 @@ const ProfileSchema = new Schema({
     type: String,
     required: true
   },
-  //imported the list model and displays it within each profile
   lists: [
     {
       type: Schema.Types.ObjectId,
