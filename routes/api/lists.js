@@ -64,21 +64,16 @@ router.post(
 // may not need this route. Getting the user's profile should return their lists as well
 router.get('/', auth, async (req, res) => {
   try {
-    //user not authenticated so lists won't be returned 
-    const profile = await ProfileModel.findOne({ user: req.user.id }) 
-      .populate('user', ['name', 'avatar','email', 'lists']);
-
-    console.log(profile);
 
     //const lists = await ListModel.find().sort({ date: -1 });
 
-    //const lists = await ListModel.find().populate('user', ['name','lists']).sort({ date: -1 });
+    const lists = await ListModel.find().populate('ListModel', ['name','lists']).sort({ date: -1 });
 
-    // if (!lists) {
-    //   res.status(400).json({ message: 'There are no lists for this user' });
-    // }
+    if (!lists) {
+      res.status(400).json({ message: 'There are no lists for this user' });
+    }
 
-    res.json(profile);
+    res.json(lists);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -89,10 +84,6 @@ router.get('/', auth, async (req, res) => {
 // @desc     Get list by ID
 // @access   Private
 
-//token is not passed in route so lists won't be returned 
-//in postman, the profile id, creator id and contributor id all match but the user id doesn't match
-//this may be why the token isn't being passed with this route
-//or you may have to specify in the list variable that you want that information passed in that variable
 router.get('/:id', auth, async (req, res) => {
   try {
     //this will get a list by its id
