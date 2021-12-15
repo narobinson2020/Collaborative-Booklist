@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://Nate123:NatE098@booklist.tntmc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://Nate123:NatE098@booklist.tntmc.mongodb.net/Booklist?retryWrites=true&w=majority",
     "jwtSecret": "mySecretToken"
 }
