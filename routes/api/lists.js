@@ -5,6 +5,7 @@ const ProfileModel = require('../../Models/ProfileModel');
 const ListModel = require('../../Models/ListModel');
 const UserModel = require('../../Models/UserModel');
 //const RatingsModel = require('../../Models/RatingsModel');
+const BooksModel = require('../../Models/BooksModel');
 const { check, validationResult } = require('express-validator');
 //const axios = require('axios');
 
@@ -27,8 +28,6 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    //returns an empty list array with an id
     try {
       //this looks for the profile matched to the user's id. ".select('-password')" will make sure that the password isn't apart of each request
       const profile = await ProfileModel.findOne({ user: req.user.id }).select(
@@ -64,10 +63,9 @@ router.post(
 // may not need this route. Getting the user's profile should return their lists as well
 router.get('/', auth, async (req, res) => {
   try {
+    //const lists = await ListModel.find().populate(['name', 'id']).sort({ date: -1 });
 
-    //const lists = await ListModel.find().sort({ date: -1 });
-
-    const lists = await ListModel.find().populate('ListModel', ['name','lists']).sort({ date: -1 });
+    const lists = await ListModel.find().sort({ date: -1 });
 
     if (!lists) {
       res.status(400).json({ message: 'There are no lists for this user' });
@@ -83,15 +81,10 @@ router.get('/', auth, async (req, res) => {
 // @route    GET api/lists/:id
 // @desc     Get list by ID
 // @access   Private
-
 router.get('/:id', auth, async (req, res) => {
   try {
-    //this will get a list by its id
     const list = await ListModel.findById(req.params.id);
 
-    console.log(list);
-
-    //check to see if that list exists
     if (!list) {
       return res.status(404).json({ msg: 'List not found' });
     }
@@ -115,6 +108,7 @@ router.get('/:id', auth, async (req, res) => {
 
 //this will pull books from an api
 //Just want to test if the route works for manually inputing a book
+//books are created and show in database but aren't displaying within the books array in the ListModel
 router.put(
   '/books',
   auth,
@@ -125,35 +119,30 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
 
-    //this says that "if there are errors (missing title, company or from date fields), then it will return one or both of the errors defined in your checks"
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, author, description, rating } = req.body;
-
-    //this will create an object with the data the user submits for new experiences
-    const newBook = {
-      title,
-      author,
-      description,
-      rating,
-    };
-
     try {
-      //this looks for the profile matched to the user's id
-      const profile = await ProfileModel.findOne({ user: req.user.id });
+      //identify the user(profile maybe?) that's adding a book to the list 
+      const user = await UserModel.findById(req.user.id).select('-password');
 
-      //this will look for the list that you are trying to add a book to
-      const list = await ListModel.findById({ list: req.list.id });
+      //create a new book 
+      const newBook = new BooksModel({
+        title: req.body.title,
+        author: req.body.author,
+        description: req.body.description,
+        rating: req.body.rating,
+        creator: user.id
+      });
 
-      //this will push new books on to the array of books. By using the unshift() method, latest book will show first
-      //make sure that this will push the book to the correct list
-      list.books.unshift(newBook);
+      
 
-      await profile.save();
+      //save the new book to the list 
+      const list = await newBook.save()
 
-      res.json(profile);
+      //return the list 
+      res.json(list);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -187,10 +176,9 @@ router.put(
 //@access value: Private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    //this will get a posts by its id
     const list = await ListModel.findById(req.params.id);
 
-    //check to make sure the user that deletes a post is the author of that post
+    //check to make sure the user that deletes a list is the author of that list
     //"list.user" by itself is an object and "req.user.id" is a string so you need to add the ".toString()" method so you get a correct comparison
     if (list.user.toString() !== req.user.id) {
       return res.status(401).json({ mesage: 'User not authorized to delete this list' });
