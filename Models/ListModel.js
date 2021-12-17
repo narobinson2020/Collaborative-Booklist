@@ -16,12 +16,10 @@ const ListSchema = new Schema({
     type: String,
     required: true,
   },
-  books: [
-    {
+  books:{
       type: Schema.Types.ObjectId,
       ref: 'BooksModel',
     },
-  ],
   date: {
     type: Date,
     default: Date.now,

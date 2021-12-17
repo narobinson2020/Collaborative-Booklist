@@ -57,6 +57,7 @@ router.post(
   }
 );
 
+
 // @route    GET api/lists
 // @desc     Get all lists for that user
 // @access   Private
@@ -77,6 +78,7 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
 
 // @route    GET api/lists/:id
 // @desc     Get list by ID
@@ -123,8 +125,7 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    try {
-      //identify the user(profile maybe?) that's adding a book to the list 
+    try { 
       const user = await UserModel.findById(req.user.id).select('-password');
 
       //create a new book 
@@ -135,8 +136,6 @@ router.put(
         rating: req.body.rating,
         creator: user.id
       });
-
-      
 
       //save the new book to the list 
       const list = await newBook.save()
@@ -151,22 +150,44 @@ router.put(
 );
 
 
-//@route: Delete api/lists/books
-//@description: remove a book from your list 
+//@route: Delete api/lists/books/:id
+//@description: delete a book from your list 
 //@access value: Private
+router.delete('/books/:id', auth, async (req, res) => {
+  try {
+    const book = await BooksModel.findById(req.params.id);
+
+    //check to make sure the user that deletes a book is the one that put the book there
+    //"book.user" by itself is an object and "req.user.id" is a string so you need to add the ".toString()" method so you get a correct comparison
+    //user is undefined
+    if (book.user.toString() !== req.user.id) {
+      return res.status(401).json({ message: 'User not authorized' });
+    } else {
+      await book.remove();
+    }
+
+    res.json({ message: 'Book deleted' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ message: 'Book does not exist' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
 
-//@route: Put api/lists/
+//@route: Put api/lists/rating
 //@description: Rate a book on your list 
 //@access value: Private
 
 
-//@route: Put api/lists/
+//@route: Put api/lists/contributor
 //@description: Add a contributor to a list 
 //@access value: Private
 
 
-//@route: Delete api/lists/
+//@route: Delete api/lists/contributor/:id
 //@description: Remove a contributor from a list 
 //@access value: Private
 
