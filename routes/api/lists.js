@@ -107,12 +107,15 @@ router.get('/:id', auth, async (req, res) => {
 //@route: Put api/lists/book
 //@description: Add a book to list (put request)
 //@access value: Private
+//try making this a public route and just add a book 
+//look at "add/delete comment to a post" video from mern stack course 
+//this video is on nested arrays (array of comments for a post) which is similar to what you want to accomplish here (array of books for each list)
 
 //this will pull books from an api
 //Just want to test if the route works for manually inputing a book
 //books are created and show in database but aren't displaying within the books array in the ListModel
 router.put(
-  '/books',
+  '/:list_id/book',
   auth,
   check('title', 'Title is required').notEmpty(),
   check('author', 'Author is required')
@@ -126,7 +129,10 @@ router.put(
     }
 
     try { 
-      const user = await UserModel.findById(req.user.id).select('-password');
+      //const user = await UserModel.findById(req.user.id).select('-password');
+
+      //find the associated list
+      const list = await ListModel.findById(req.params.list_id);
 
       //create a new book 
       const newBook = new BooksModel({
@@ -134,14 +140,17 @@ router.put(
         author: req.body.author,
         description: req.body.description,
         rating: req.body.rating,
-        creator: user.id
+        list: list.list_id
       });
 
-      //save the new book to the list 
-      const list = await newBook.save()
+      console.log(newBook);
+
+      //save the new book 
+      //const book = await newBook.save();
+      await list.save();
 
       //return the list 
-      res.json(list);
+      res.json(list.book);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -153,7 +162,7 @@ router.put(
 //@route: Delete api/lists/books/:id
 //@description: delete a book from your list 
 //@access value: Private
-router.delete('/books/:id', auth, async (req, res) => {
+router.delete('/book/:id', auth, async (req, res) => {
   try {
     const book = await BooksModel.findById(req.params.id);
 
@@ -177,9 +186,20 @@ router.delete('/books/:id', auth, async (req, res) => {
 });
 
 
-//@route: Put api/lists/rating
+//@route: Put api/lists/books/rating
 //@description: Rate a book on your list 
 //@access value: Private
+//Aggregate rating system of all contributors 
+router.put('/books/:id/rating', auth, async (req, res) => {
+  try {
+    const book = await BooksModel.findById(req.params.id);
+    
+    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 
 //@route: Put api/lists/contributor
@@ -187,9 +207,11 @@ router.delete('/books/:id', auth, async (req, res) => {
 //@access value: Private
 
 
+
 //@route: Delete api/lists/contributor/:id
 //@description: Remove a contributor from a list 
 //@access value: Private
+
 
 
 //@route: Delete api//lists/:id 
