@@ -1,38 +1,293 @@
-.App {
+/* Global Styles */
+* {
+  background-color: #FCF3CF;
+  /* background-color: #dbc598; */
+}
+
+
+/* Authenticate styles */
+.title-auth {
   text-align: center;
+  padding: 5px;
+  width: auto;
+  color: #d98880;
+  /* border: solid 1px red; */
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.container-auth {
+  display: grid;
+  /* border: solid 1px blue; */
+  padding: 5px;
+  grid-template-columns: 500px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2vw;
+  margin: 2vw;
 }
 
-.App-link {
-  color: #61dafb;
+.register-auth {
+  /* border: solid 1px green; */
+  display: flex;
+  /* margin: 100%; */
+  justify-content: center;
+  margin: 1vw;
+  padding: 1vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-auth {
+  /* border: solid 1px orange; */
+  display: flex;
+  /* margin: auto; */
+  justify-content: center;
+  margin: 1vw;
+  padding: 1vw;
+}
+
+a {
+  text-decoration: none;
+  background-color: white;
+}
+
+button {
+  background-color: white;
+  color: black;
+}
+
+/* this is for a button animation that didn't go so well */
+/* still want some sort of button animation but will leave this for now */
+
+/* button:hover {
+  background-color: #3498DB;
+} */
+
+/* a:hover {
+  color: white; 
+} */
+
+
+/* Sign up styles */
+.title-up, h1{
+  text-align: center;
+  padding: 5px;
+  width: auto;
+  /* border: solid 1px red; */
+  /* background-color: #f5cba7; */
+}
+
+.form {
+  display: grid;
+  /* border: solid 1px blue; */
+  padding: 5px;
+  grid-template-columns: 500px;
+  justify-content: center;
+  padding: 2vw;
+  margin: 2vw;
+}
+
+.form-group-up {
+  /* border: solid 1px green; */
+  /* display: flex;
+  justify-content: center; */
+  display: grid;
+  place-items: center;
+  margin: auto;
+  padding: 1.5vw;
+  font-weight: bold;
+}
+
+input.one{
+  margin-left: 1vw;
+}
+
+#submit:hover {
+  background-color: #3498DB;
+  color: white; 
+}
+
+
+/* Signin Styles */
+.title-in, h1{
+  text-align: center;
+  padding: 5px;
+  width: auto;
+  /* border: solid 1px red; */
+  /* background-color: #f5cba7; */
+}
+
+.form-in {
+  display: grid;
+  /* border: solid 1px blue; */
+  padding: 5px;
+  grid-template-columns: 500px;
+  justify-content: center;
+  padding: 2vw;
+  margin: 2vw;
+}
+
+.form-group-in {
+  /* border: solid 1px green; */
+  display: grid;
+  place-items: center;
+  margin: auto;
+  padding: 1.5vw;
+  font-weight: bold;
+}
+
+input.two{
+  margin-left: 1vw;
+}
+
+#submit:hover {
+  background-color: #3498DB;
+  color: white; 
+}
+
+
+/* Profile styles */
+.header {
+  display: flex;
+  /* border: solid 1px red;  */
+}
+
+.icon, .welcome, .dashboard {
+  display: inline-flex;
+  margin: auto;
+  /* border: solid 1px blue; */
+}
+
+.welcome {
+  color: #d98880;
+}
+
+/* need to make icon bigger */
+img {
+  max-width:100%;
+  height:auto; 
+}
+
+h3 {
+  color: #d98880;
+}
+
+a {
+  text-decoration: none;
+  color: #d98880;
+}
+
+a:hover {
+  color: white; 
+  background-color: #3498DB;
+}
+
+button {
+  color: #d98880;
+}
+
+button:hover {
+  background-color: #3498DB;
+}
+
+.list-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  margin: 2.5vw;
+}
+
+.btn {
+  margin: 2.5vw;
+}
+
+.my-lists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  grid-auto-flow: row;
+  /* border: solid 1px blue; */
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+.list {
+  /* border: solid 1px red; */
+  justify-content: center;
+  text-align: center;
+  margin: 1vw;
+}
+
+
+/* Dashboard/ profile management styles */
+.title-dashboard {
+  text-align: center;
+  color: #d98880;
+}
+
+.form-dashboard {
+  /* border: solid 1px blue; */
+  margin-top: 10vh;
+  display: grid;
+  place-items: center;
+}
+
+.form-group-dash {
+  margin: auto;
+  padding: 1.5vw;
+  font-weight: bold;
+}
+
+input.three{
+  margin-left: 1vw;
+}
+
+/* Create list styles */
+.title-create {
+  text-align: center;
+  color: #d98880;
+}
+
+.form-create {
+  /* border: solid 1px blue; */
+  margin-top: 10vh;
+  display: grid;
+  place-items: center;
+}
+
+.form-group-create {
+  margin: 1.5vh;
+  font-weight: bold; 
+}
+
+
+/* Add friend styles */
+.title-add {
+  text-align: center;
+  color: #d98880;
+}
+
+form {
+  /* border: solid 1px blue; */
+  margin-top: 10vh;
+  display: grid;
+  place-items: center;
+}
+
+.form-group-add {
+  margin: 1.5vh;
+  font-weight: bold; 
+}
+
+.heading-add {
+  color: #d98880;
+}
+
+.user-list-add {
+  display: grid;
+  place-content: center;
+}
+
+ul {
+  list-style-type: none;
 }
