@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 
 const Signin = () => {
   return (
-    <div>
+    <Fragment>
       <div className='title-in'>
         <h1>Sign In</h1>
       </div>
@@ -36,7 +36,7 @@ const Signin = () => {
           </button>
         </div>
       </form>
-    </div>
+    </Fragment>
   );
 };
 
