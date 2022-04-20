@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
-    <div>
+    <Fragment>
       <div className='title-auth'>
         <h1>Welcome to Your Booklist!</h1>
       </div>
@@ -19,7 +19,7 @@ const Landing = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

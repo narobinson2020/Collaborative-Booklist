@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { Link } from 'react-router-dom';
 
 const SignIn = () => {
@@ -47,7 +47,7 @@ const SignIn = () => {
           />
         </div>
         <div className='form-group-in'>
-          <input id='submit' type='submit' value='Login' />
+          <input id='submit' type='submit' value='Sign In'/>
         </div>
         <div>
           <p>

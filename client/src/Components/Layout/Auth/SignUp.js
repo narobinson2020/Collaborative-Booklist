@@ -15,7 +15,7 @@ const SignUp = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
       console.log('Passwords do not match');
@@ -29,7 +29,7 @@ const SignUp = () => {
       <div className='title-up'>
         <h1>Sign Up</h1>
       </div>
-      <form className='form-up' onSubmit={(e) => onSubmit(e)}>
+      <form className='form-up' onSubmit={handleSubmit}>
         <div className='form-group-up'>
           <label for='name'>Name</label>
           <input
