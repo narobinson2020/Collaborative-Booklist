@@ -51,7 +51,7 @@ const SignIn = () => {
         </div>
         <div>
           <p>
-            Don't have an acccount? <Link to='/signup'>Sign Un</Link>
+            Don't have an acccount? <Link to='/signup'>Sign Up</Link>
           </p>
         </div>
         <div>
