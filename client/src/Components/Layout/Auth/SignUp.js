@@ -2,10 +2,11 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../../Actions/alert';
+import PropTypes from 'prop-types';
 
 // I get a "hydrate(pin): undefined error when returning the initial state in redux"
 // may have something to do with combineReducers in store.js or index.js 
-const SignUp = (props) => {
+const SignUp = ({setAlert}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +22,7 @@ const SignUp = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert('Passwords do not match', 'danger');
+      setAlert('Passwords do not match', 'danger');
     } else {
       console.log('Success!');
     }
@@ -99,6 +100,10 @@ const SignUp = (props) => {
       </form>
     </Fragment>
   );
+};
+
+SignUp.propTypes = {
+  setAlert: PropTypes.func.isRequired
 };
 
 export default connect(null, {setAlert})(SignUp); 
