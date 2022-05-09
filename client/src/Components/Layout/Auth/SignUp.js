@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../../Actions/alert';
 
-
+// I get a "hydrate(pin): undefined error when returning the initial state in redux"
+// may have something to do with combineReducers in store.js or index.js 
 const SignUp = (props) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -33,7 +34,7 @@ const SignUp = (props) => {
       </div>
       <form className='form-up' onSubmit={handleSubmit}>
         <div className='form-group-up'>
-          <label for='name'>Name</label>
+          <label htmlFor='name'>Name</label>
           <input
             className='one'
             type='text'
@@ -45,7 +46,7 @@ const SignUp = (props) => {
           />
         </div>
         <div className='form-group-up'>
-          <label for='email'>Email</label>
+          <label htmlFor='email'>Email</label>
           <input
             className='one'
             type='email'
@@ -57,7 +58,7 @@ const SignUp = (props) => {
           />
         </div>
         <div className='form-group-up'>
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             className='two'
             type='password'
@@ -70,7 +71,7 @@ const SignUp = (props) => {
           />
         </div>
         <div className='form-group-up'>
-          <label for='password'> Confirm Password</label>
+          <label htmlFor='password'> Confirm Password</label>
           <input
             className='two'
             type='password'

@@ -24,7 +24,7 @@ const SignIn = () => {
       </div>
       <form className='form-in' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group-in'>
-          <label for='email'>Email</label>
+          <label htmlFor='email'>Email</label>
           <input
             className='one'
             type='email'
@@ -35,7 +35,7 @@ const SignIn = () => {
           />
         </div>
         <div className='form-group-in'>
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             className='one'
             type='password'
