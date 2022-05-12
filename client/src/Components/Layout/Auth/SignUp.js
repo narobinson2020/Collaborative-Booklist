@@ -2,11 +2,12 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../../Actions/alert';
+import { register} from '../../../Actions/auth';
 import PropTypes from 'prop-types';
 
 // I get a "hydrate(pin): undefined error when returning the initial state in redux"
 // may have something to do with combineReducers in store.js or index.js 
-const SignUp = ({setAlert}) => {
+const SignUp = ({setAlert, register}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +25,7 @@ const SignUp = ({setAlert}) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      console.log('Success!');
+      register({name, email, password});
     }
   };
 
@@ -43,7 +44,7 @@ const SignUp = ({setAlert}) => {
             value={name}
             onChange={(e) => onChange(e)}
             placeholder='Name'
-            required
+            // required
           />
         </div>
         <div className='form-group-up'>
@@ -55,7 +56,7 @@ const SignUp = ({setAlert}) => {
             value={email}
             onChange={(e) => onChange(e)}
             placeholder='Email'
-            required
+            // required
           />
         </div>
         <div className='form-group-up'>
@@ -64,11 +65,11 @@ const SignUp = ({setAlert}) => {
             className='two'
             type='password'
             name='password'
-            minLength='6'
+            // minLength='6'
             placeholder='Password'
             value={password}
             onChange={(e) => onChange(e)}
-            required
+            // required
           />
         </div>
         <div className='form-group-up'>
@@ -77,11 +78,11 @@ const SignUp = ({setAlert}) => {
             className='two'
             type='password'
             name='password2'
-            minLength='6'
+            // minLength='6'
             placeholder='Confirm Password'
             value={password2}
             onChange={(e) => onChange(e)}
-            required
+            // required
           />
         </div>
         <div className='form-group-up'>
@@ -103,7 +104,8 @@ const SignUp = ({setAlert}) => {
 };
 
 SignUp.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
-export default connect(null, {setAlert})(SignUp); 
+export default connect(null, {setAlert, register})(SignUp); 
