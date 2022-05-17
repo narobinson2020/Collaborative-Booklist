@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../../Actions/alert';
-import { register} from '../../../Actions/auth';
+import { register } from '../../../Actions/auth';
 import PropTypes from 'prop-types';
 
 // I get a "hydrate(pin): undefined error when returning the initial state in redux"
-// may have something to do with combineReducers in store.js or index.js 
-const SignUp = ({setAlert, register}) => {
+// may have something to do with combineReducers in store.js or index.js
+const SignUp = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,9 +25,14 @@ const SignUp = ({setAlert, register}) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({name, email, password});
+      register({ name, email, password });
     }
   };
+
+  // Redirect when regristation is done
+  if (isAuthenticated) {
+    return <Navigate to='/profile' />;
+  }
 
   return (
     <Fragment>
@@ -105,7 +110,12 @@ const SignUp = ({setAlert, register}) => {
 
 SignUp.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, {setAlert, register})(SignUp); 
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(SignUp);

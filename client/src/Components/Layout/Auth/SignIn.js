@@ -1,10 +1,14 @@
-import React, {Fragment, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../../Actions/auth';
+import PropTypes from 'prop-types';
 
-const SignIn = () => {
+
+const SignIn = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const { email, password } = formData;
@@ -14,8 +18,13 @@ const SignIn = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('Success!');
+    login(email, password);
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Navigate to='/profile' />;
+  }
 
   return (
     <Fragment>
@@ -47,7 +56,7 @@ const SignIn = () => {
           />
         </div>
         <div className='form-group-in'>
-          <input id='submit' type='submit' value='Sign In'/>
+          <input id='submit' type='submit' value='Sign In' />
         </div>
         <div>
           <p>
@@ -64,4 +73,13 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+SignIn.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(SignIn);
