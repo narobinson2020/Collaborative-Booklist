@@ -23,7 +23,7 @@ const SignIn = ({ login, isAuthenticated }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Navigate to='/profile' />;
+    return <Navigate to='/dashboard' />;
   }
 
   return (

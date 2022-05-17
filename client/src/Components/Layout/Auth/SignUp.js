@@ -31,7 +31,7 @@ const SignUp = ({ setAlert, register, isAuthenticated }) => {
 
   // Redirect when regristation is done
   if (isAuthenticated) {
-    return <Navigate to='/profile' />;
+    return <Navigate to='/dashboard' />;
   }
 
   return (
