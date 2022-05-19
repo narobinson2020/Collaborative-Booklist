@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { login } from '../../../Actions/auth';
 import PropTypes from 'prop-types';
 
-
 const SignIn = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -23,7 +22,7 @@ const SignIn = ({ login, isAuthenticated }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Navigate to='/dashboard' />;
+    return <Navigate to='/profile' />;
   }
 
   return (
@@ -37,7 +36,7 @@ const SignIn = ({ login, isAuthenticated }) => {
           <input
             className='one'
             type='email'
-            name='Email'
+            name='email'
             placeholder='Email'
             value={email}
             onChange={(e) => onChange(e)}
@@ -48,7 +47,7 @@ const SignIn = ({ login, isAuthenticated }) => {
           <input
             className='one'
             type='password'
-            name='Password'
+            name='password'
             minLength='6'
             placeholder='Password'
             value={password}
