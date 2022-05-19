@@ -7,22 +7,23 @@ import Landing from './Components/Layout/Auth/Landing';
 import Alert from './Components/Layout/Layout/alert';
 import { loadUser } from './Actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Profile from './Components/Layout/Profile/Profile';
+import PrivateRoute from './Components/Layout/Routing/privateRoute';
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
-
-if(localStorage.token) {
+if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = () => { 
-useEffect(() => {
-  store.dispatch(loadUser);
-}, []);
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser);
+  }, []);
 
-  return( 
+  return (
     <Provider store={store}>
       <Router>
         <Fragment>
@@ -32,11 +33,20 @@ useEffect(() => {
             <Route exact path='/' element={<Landing />} />
             <Route exact path='/signup' element={<SignUp />} />
             <Route exact path='/signin' element={<SignIn />} />
+            <Route
+              exact
+              path='/profile'
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Fragment>
       </Router>
     </Provider>
-  )
+  );
 };
 
 export default App;
