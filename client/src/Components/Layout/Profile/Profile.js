@@ -1,12 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCurrentProfile } from '../../../Actions/profile';
 
-const Profile = props => {
-  return (
-    <div>Profile</div>
-  )
-}
+const Profile = ({ getCurrentProfile, auth, profile }) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
 
-Profile.propTypes = {}
+  return <div>Profile</div>;
+};
 
-export default Profile
+Profile.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(Profile);
