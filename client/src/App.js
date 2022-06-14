@@ -30,18 +30,17 @@ const App = () => {
           {/* Components that you want to render regardless of the page (ex: nav bar) should be put outside the routes component but inside the router component */}
           <Alert />
           <Routes>
-            <Route exact path='/' element={<Landing />} />
-            <Route exact path='/signup' element={<SignUp />} />
-            <Route exact path='/signin' element={<SignIn />} />
+            <Route path='/' element={<Landing />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/signin' element={<SignIn />} />
             <Route
-              exact
-              path='/profile'
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
+          path='/profile'
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
           </Routes>
         </Fragment>
       </Router>

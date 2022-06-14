@@ -5,22 +5,24 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../../Actions/profile';
 import Spinner from '../Layout/spinner';
 
+// private route issue might be in profile component. user.name on line 23 might be returning "undefined"
+// issue could also be 
 const Profile = ({
   getCurrentProfile,
   auth: { user },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, []);
+    getCurrentProfile()
+  }, [getCurrentProfile]); //adding getCurrentProfile into the array seems to have solved the the useEffect issue
 
   return loading && profile === null ? (
     <Spinner />
   ) : (
     <Fragment>
-      <h1>Welcome {user && user.name}!</h1>
+      <h1>Welcome!</h1>
       {profile !== null ? (
-        <Fragment>This will be the profile component jsx</Fragment>
+        <Fragment><h1>This will be the profile component jsx</h1></Fragment>
       ) : (
         <Fragment>
           Begin by creating a list for you and your friends!{' '}

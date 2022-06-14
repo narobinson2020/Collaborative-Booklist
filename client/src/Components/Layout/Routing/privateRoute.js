@@ -1,24 +1,26 @@
 import React from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
+import { Route, Navigate, Routes, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Profile from '../Profile/Profile';
 
 const PrivateRoute = ({
   component: Component,
-  auth: { isAuthenticated },
+  auth: { isAuthenticated, loading },
   ...rest
 }) => (
   <Routes>
       <Route
         {...rest}
         render={(props) =>
-          !isAuthenticated ? (
+          !isAuthenticated && !loading ? (
             <Navigate to='/signin' replace/>
           ) : (
-            <Component {...props} />
+            <Profile {...props} />
           )
         }
       />
+      <Outlet />
   </Routes>
 );
 
