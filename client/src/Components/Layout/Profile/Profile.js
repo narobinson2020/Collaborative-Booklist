@@ -18,7 +18,8 @@ const Profile = ({
   }, [getCurrentProfile]); //adding getCurrentProfile into the array seems to have solved the the useEffect issue
 
   return loading && profile === null ? (
-    <Spinner />
+    // <Spinner />
+    <Fragment>Hello world</Fragment>
   ) : (
     <Fragment>
       <h1>Welcome {user && user.name}!</h1>
