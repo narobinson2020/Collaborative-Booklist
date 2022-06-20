@@ -16,7 +16,7 @@ const PrivateRoute = ({
           !isAuthenticated && !loading ? (
             <Navigate to='/signin' replace/>
           ) : (
-          //this was originally <Component {...props} /> but changed to profile so that each time a use logs in they are redirected to the profile page
+          //this was originally <Component {...props} /> but changed to profile so that each time a use logs in they are redirected to the profile page.
             <Profile {...props} /> 
           )
         }
