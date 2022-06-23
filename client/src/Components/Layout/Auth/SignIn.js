@@ -22,7 +22,7 @@ const SignIn = ({ login, isAuthenticated }) => {
   };
 
   // Redirect if logged in
-  // figure out where you want to validate isAuthentiated on this page (onSubmite or onChange)
+  // figure out where you want to validate isAuthentiated on this page (onSubmit or onChange)
   // delete form, make sure everything renders and consider making simpler signin form
   // hard code email and passwords via variables for now to make sure validation works 
   if (isAuthenticated) {
@@ -35,7 +35,7 @@ const SignIn = ({ login, isAuthenticated }) => {
       <div className='title-in'>
         <h1>Sign In</h1>
       </div>
-      {/* <form className='form-in' onSubmit={(e) => onSubmit(e)}>
+      <form className='form-in' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group-in'>
           <label htmlFor='email'>Email</label>
           <input
@@ -72,7 +72,7 @@ const SignIn = ({ login, isAuthenticated }) => {
             <Link to='/'>Cancel</Link>
           </button>
         </div>
-      </form> */}
+      </form>
     </Fragment>
   );
 };
